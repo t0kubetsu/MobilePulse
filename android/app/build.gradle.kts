@@ -39,6 +39,23 @@ android {
     }
 }
 
+dependencies {
+    // Kotlin standard library
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0")
+
+    // Google Play Services Location
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+
+    // OkHttp3
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+
+    // JSON parsing
+    implementation("org.json:json:20230227")
+
+    // AndroidX core
+    implementation("androidx.core:core-ktx:1.12.0")
+}
+
 flutter {
     source = "../.."
 }
