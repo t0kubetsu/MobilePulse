@@ -42,10 +42,8 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    // Start location tracking if permission is granted
     startService();
 
-    // Load Nyan Cat frames and audio
     _nyanCatFramesFuture = loadNyanFrames();
     loadAudio();
   }
@@ -62,13 +60,11 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  /// Load Nyan Cat's sound/music
   Future<void> loadAudio() async {
     await player.setAsset('assets/nyan-cat.ogg');
-    player.setVolume(0); // Mute by default
+    player.setVolume(1.0);
   }
 
-  /// Load the assets (individual image frames) for Nyan Cat animation
   Future<List<ui.Image>> loadNyanFrames() async {
     var images = <ui.Image>[];
     for (var i = 0; i < 7; i++) {
