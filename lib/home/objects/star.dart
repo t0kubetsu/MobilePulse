@@ -54,7 +54,6 @@ class _StarState extends State<Star> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      child: Container(),
       painter: SparkPainter(
         relativeOff: _anim.value,
         sparkSize: widget.sparkSize,
@@ -64,6 +63,7 @@ class _StarState extends State<Star> with SingleTickerProviderStateMixin {
         translateBy: widget.offset,
         angleInRadians: widget.angle,
       ),
+      child: Container(),
     );
   }
 }

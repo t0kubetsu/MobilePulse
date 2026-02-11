@@ -39,11 +39,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   double _angle = 0;
   double _scale = 1;
   Color _fabColor = Colors.teal;
-  Color _bgColor = Color.fromRGBO(10, 52, 97, 1);
-  int _nyanSpeed = Random().nextInt(15000) + 5000;
+  final Color _bgColor = Color.fromRGBO(10, 52, 97, 1);
+  final int _nyanSpeed = Random().nextInt(15000) + 5000;
   List<Offset> _translationOffset = [];
-  var _starList = <Star>[];
-  var _cat = <Widget>[];
+  final _starList = <Star>[];
+  final _cat = <Widget>[];
   Timer? _timer;
 
   void setStars() {
