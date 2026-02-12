@@ -199,7 +199,6 @@ Key packages used:
 * `geolocator`
 * `device_info_plus`
 * `permission_handler`
-* `http`
 * `just_audio`
 
 ## Building the Application
