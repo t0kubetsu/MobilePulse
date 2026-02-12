@@ -23,10 +23,14 @@ Before initializing core services, the app verifies the integrity of the runtime
 #### Checks Performed
 
 The following validations are executed:
-* Root detection (Android)
-* Jailbreak detection (iOS)
+* Jailbreak / Root detection
 * Emulator / simulator detection
-* External storage installation check (Android)
+* Proxy detection
+* Dev mode detection
+* Reverse engineering check
+* Frida / Cydia detection
+* Tamper detection
+* External storage installation check
 
 If any of these checks indicate a problem, the app:
 * Stops normal initialization
@@ -131,7 +135,6 @@ AppConstants.locationEndpoint
     * Location tracking begins.
 5. UI loads animated frames and audio assets.
 6. The home screen renders the animated interface.
-
 
 ## Permissions
 
