@@ -42,32 +42,24 @@ Future<List<String>> _getSecurityIssues() async {
   final issues = <String>[];
 
   try {
-    final isNotTrust = await JailbreakRootDetection.instance.isNotTrust;
-    final isRealDevice = await JailbreakRootDetection.instance.isRealDevice;
-
     print('=== SECURITY CHECK ===');
-    print('isNotTrust: $isNotTrust');
-    print('isRealDevice: $isRealDevice');
 
-    if (isNotTrust) issues.add('Device is rooted/jailbroken');
-    if (!isRealDevice) issues.add('Running on emulator/simulator');
+    final checkForIssues = await JailbreakRootDetection.instance.checkForIssues;
 
-    if (Platform.isAndroid) {
-      try {
-        bool isOnExternalStorage =
-        await JailbreakRootDetection.instance.isOnExternalStorage;
-        print('isOnExternalStorage: $isOnExternalStorage');
-        if (isOnExternalStorage) issues.add('App installed on external storage');
-      } catch (e) {
-        issues.add('Error checking external storage: $e');
+    print('Total issues found: ${checkForIssues.length}');
+
+    for (final issue in checkForIssues) {
+      final description = _getIssueDescription(issue);
+      if (description.isNotEmpty) {
+        issues.add(description);
+        print('  - $description');
       }
     }
 
     if (issues.isEmpty) {
       print('✅ No security issues detected');
     } else {
-      print('⚠️ Security issues detected:');
-      issues.forEach((issue) => print('  - $issue'));
+      print('⚠️ Security issues detected: ${issues.length}');
     }
   } catch (e) {
     print('Error during security check: $e');
@@ -75,6 +67,34 @@ Future<List<String>> _getSecurityIssues() async {
   }
 
   return issues;
+}
+
+String _getIssueDescription(dynamic issue) {
+  final issueString = issue.toString();
+
+  if (issueString.contains('jailbreak')) {
+    return 'Device is jailbroken';
+  } else if (issueString.contains('notRealDevice')) {
+    return 'Running on emulator/simulator';
+  } else if (issueString.contains('proxied')) {
+    return 'Device is proxied';
+  } else if (issueString.contains('debugged')) {
+    return '';
+  } else if (issueString.contains('devMode')) {
+    return 'Device is in dev mode';
+  } else if (issueString.contains('reverseEngineered')) {
+    return 'Reverse engineering detected';
+  } else if (issueString.contains('fridaFound')) {
+    return 'Device is found using Frida';
+  } else if (issueString.contains('cydiaFound')) {
+    return 'Device is found using Cydia';
+  } else if (issueString.contains('tampered')) {
+    return 'Device is tampered';
+  } else if (issueString.contains('onExternalStorage')) {
+    return 'App installed on external storage';
+  } else {
+    return issueString.replaceAll('JailbreakIssue.', '');
+  }
 }
 
 class SecurityErrorApp extends StatelessWidget {
