@@ -1,4 +1,4 @@
-package com.example.app
+package nyan.cat.app
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
